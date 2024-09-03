@@ -7,9 +7,13 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import InsertEmotionIcon from '@mui/icons-material/InsertEmoticon';
 import MicIcon from '@mui/icons-material/Mic';
+import { useParams } from 'react-router-dom';
+
+
 function Chat() { 
   const [input, setInput] = useState('');
   const [seed, setSeed] = useState('');
+  const { chatId } = useParams();
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
