@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Chat.css'
-import { useEffect, useState } from 'react';
 import { Avatar, IconButton } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
@@ -8,16 +7,23 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import InsertEmotionIcon from '@mui/icons-material/InsertEmoticon';
 import MicIcon from '@mui/icons-material/Mic';
 import { useParams } from 'react-router-dom';
-
-
+import db, { doc, onSnapshot } from '../../firebase';
 function Chat() { 
   const [input, setInput] = useState('');
-  const [seed, setSeed] = useState('');
+  const [chatName, setChatName] = useState('');
   const { chatId } = useParams();
-  useEffect(() => {
-    setSeed(Math.floor(Math.random() * 5000));
-  }, []);
 
+  useEffect(() => {
+    if (chatId) {
+      const unsubscribe = onSnapshot(doc(db, 'chats', chatId), (snapshot) => {
+        if (snapshot.exists()) {
+          setChatName(snapshot.data().name);
+        }
+      });
+
+      return () => unsubscribe();
+    }
+  }, [chatId]);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -28,10 +34,10 @@ function Chat() {
   return (
     <div className='chat'>
       <div className='chat__header'>
-        <Avatar src={`https://api.dicebear.com/9.x/pixel-art/svg?seed=${seed}`} />
+        <Avatar src={`https://api.dicebear.com/9.x/pixel-art/svg?seed=${Math.floor(Math.random() * 5000)}`} />
 
         <div className='chat__headerInfo'>
-          <h3>Room Name</h3>
+          <h3>{chatName}</h3>
           <p>Last seen at...</p>
         </div>
 
@@ -53,7 +59,7 @@ function Chat() {
             <span className='chat__name'>Ruthwik</span>
           Hey there
             <span className='chat__timestamp'>3:52 pm</span>
-
+ 
           </p>
 
       </div>
