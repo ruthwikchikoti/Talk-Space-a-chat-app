@@ -6,7 +6,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IconButton } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import SidebarChat from './SidebarChat';
+import SidebarChat from '../SidebarChat/SidebarChat';
 function Sidebar() {
     return (
         <div className="sidebar">
