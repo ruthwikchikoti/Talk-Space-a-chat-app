@@ -9,9 +9,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IconButton } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SidebarChat from '../SidebarChat/SidebarChat';
+import { useStateValue } from '../../StateProvider';
 
 function Sidebar() {
     const [chats, setChats] = useState([]);
+    const [{ user }, dispatch] = useStateValue();
 
     useEffect(() => {
         const chatsCollection = collection(db, 'chats');
@@ -28,7 +30,7 @@ function Sidebar() {
     return (
         <div className="sidebar">
             <div className="sidebar__header">
-                <Avatar />
+                <Avatar src={user? user.photoURL : ''} />
                 <div className="sidebar__headerRight">
                     <IconButton>
                         <DonutLargeIcon />

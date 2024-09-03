@@ -2,16 +2,16 @@ import './App.css';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Chat from './Components/Chat/Chat';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
 import  Login  from './Components/Login/Login';
+import { useStateValue } from './StateProvider';
 function App() {
-  const [user, setUser] = useState(null);
+  const [{user}, dispatch] = useStateValue();
   
   return (
     <div className="app">
       {!user ? (
-        <Login/>
-) : (
+        <Login dispatch={dispatch}/>
+      ) : (
         <Router>
           <div className="app__body">
             <Sidebar />
@@ -27,3 +27,4 @@ function App() {
 }
 
 export default App;
+
