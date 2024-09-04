@@ -59,14 +59,24 @@ function Chat() {
   }
 
   const formatTimestamp = (timestamp) => {
+    if (!timestamp) return 'No messages yet';
+    
     if (timestamp instanceof Timestamp) {
       return timestamp.toDate().toUTCString();
     } else if (timestamp instanceof Date) {
       return timestamp.toUTCString();
+    } else if (timestamp.seconds && timestamp.nanoseconds) {
+      // Handle Firestore Timestamp object
+      return new Timestamp(timestamp.seconds, timestamp.nanoseconds).toDate().toUTCString();
     } else if (typeof timestamp === 'string') {
       return new Date(timestamp).toUTCString();
     }
     return 'Invalid Date';
+  }
+
+  const getLastSeenTimestamp = () => {
+    const lastMessage = messages[messages.length - 1];
+    return lastMessage ? lastMessage.timestamp : null;
   }
 
   return (
@@ -76,7 +86,7 @@ function Chat() {
 
         <div className='chat__headerInfo'>
           <h3>{chatName}</h3>
-          <p>Last seen at...</p>
+          <p>Last seen: {formatTimestamp(getLastSeenTimestamp())}</p>
         </div>
 
         <div className='chat__headerRight'>
