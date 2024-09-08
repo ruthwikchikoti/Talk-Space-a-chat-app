@@ -2,18 +2,22 @@ import React from 'react';
 import './Login.css';
 import { auth, provider } from '../../firebase';
 import { signInWithPopup } from 'firebase/auth';
-import { actionTypes } from '../../reducer';
 import { useStateValue } from '../../StateProvider';
+import { saveUserToFirestore } from '../../utils/firebaseHelpers';
 
 function Login() {
-    const [{},dispatch] = useStateValue();
+    const [{}, dispatch] = useStateValue();
 
     const signIn = () => {
+        console.log(auth);
         signInWithPopup(auth, provider)
-            .then((res) => {
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user: res.user,
+            .then((result) => {
+                const user = result.user;
+                saveUserToFirestore(user).then(() => {
+                    dispatch({
+                        type: "SET_USER",
+                        user: user,
+                    });
                 });
             })
             .catch((error) => alert(error.message));
