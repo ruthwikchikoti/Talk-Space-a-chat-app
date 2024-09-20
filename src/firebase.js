@@ -3,13 +3,13 @@ import { getFirestore, doc, onSnapshot } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDil3ErQ6YzOgYfsnhnnb8BN1Msvn9icCg",
-    authDomain: "talkspace-0510.firebaseapp.com",
-    projectId: "talkspace-0510",
-    storageBucket: "talkspace-0510.appspot.com",
-    messagingSenderId: "444048478091",
-    appId: "1:444048478091:web:dcacc61d66b56a2c3aa98e",
-    measurementId: "G-05EV17YX3D"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
