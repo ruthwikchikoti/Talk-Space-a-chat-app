@@ -1,5 +1,5 @@
 # TalkSpace
-- live link : [live link](talkspace-0510.web.app)
+- live link : [live link](https://talkspace-0510.web.app/)
 - demo video : [demo video](https://drive.google.com/file/d/1VrLj7tVRpgaouSZC3A1o-FDapOT_KI9M/view)
 ## Overview
 **TalkSpace** is a real-time chat application built using React, Firebase, and Material-UI. This project allows users to sign in with their Google account, create new chats, and send messages to each other.
