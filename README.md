@@ -1,4 +1,4 @@
-# TalkSpace
+# TalkSpace - A Chat App
 - live link : [live link](https://talkspace-0510.web.app/)
 - demo video : [demo video](https://drive.google.com/file/d/1VrLj7tVRpgaouSZC3A1o-FDapOT_KI9M/view)
 ## Overview
